@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Trang chủ</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+     {%load static%}
+    <!-- Google Web Fonts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 href="/" class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">T</span>Ecommerce</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="/cart" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                    <span class="badge"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Thương mại điện tử</h1>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="flex justify-content-between">
+            <p>Thiết kế và kiến trúc phần mềm</p>
+            <p>Thầy Quế</p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js'%}"></script>
+    <script src="{% static 'mail/contact.js'%}"></script>
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js'%}"></script>
+</body>
+
+</html>

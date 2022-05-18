@@ -1,0 +1,121 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+    <div class="container-fluid pt-5">
+     <div class="row px-xl-5">
+         <div class="col-lg-8 table-responsive mb-5">
+             <table class="table table-bordered text-center mb-0">
+                 <thead class="bg-secondary text-dark">
+                     <tr>
+                         <th>Products</th>
+                         <th>Price</th>
+                         <th>Quantity</th>
+                         <th>Total</th>
+                         <th>Remove</th>
+                     </tr>
+                 </thead>
+                 <tbody class="align-middle">
+                    {% for product in products %}
+                    <tr>
+                         <td class="align-middle"><img src="{{product.url}}" alt="" style="width: 50px;height: 50px">{{product.name}}</td>
+                         <td class="align-middle">${{product.price}}</td>
+                         <td class="align-middle">
+                             <div class="input-group quantity mx-auto" style="width: 100px;">
+                                 <div class="input-group-btn">
+                                     <button class="btn btn-sm btn-primary btn-minus" id="mn_{{product.cartit}}_{{product.quantity}}">
+                                     <i class="fa fa-minus" id="mn_{{product.cartit}}_{{product.quantity}}"></i>
+                                     </button>
+                                 </div>
+                                 <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{product.quantity}}">
+                                 <div class="input-group-btn">
+                                     <button class="btn btn-sm btn-primary btn-plus" id="pl_{{product.cartit}}_{{product.quantity}}">
+                                         <i class="fa fa-plus" id="mn_{{product.cartit}}_{{product.quantity}}"></i>
+                                     </button>
+                                 </div>
+                             </div>
+                         </td>
+                         <td class="align-middle">${{product.total}}</td>
+                         <td class="align-middle"><button class="btn btn-sm btn-primary remove" id="mn_{{product.cartit}}_{{product.quantity}}"><i class="fa fa-times ic-remove" id="mn_{{product.cartit}}_{{product.quantity}}"></i></button></td>
+                     </tr>
+                    {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+         <div class="col-lg-4">
+             <div class="card border-secondary mb-5">
+                 <div class="card-header bg-secondary border-0">
+                     <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                 </div>
+                 <div class="card-footer border-secondary bg-transparent">
+                     <div class="d-flex justify-content-between mt-2">
+                         <h5 class="font-weight-bold">Total</h5>
+                         <h5 class="font-weight-bold">${{sum}}</h5>
+                     </div>
+                     <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+    <!-- Shop End -->
+    <script>
+     $('.btn-minus,.fa-minus').click((e)=>{
+           item = e.target.id.split('_')[1];
+           quantity = e.target.id.split('_')[2];
+           quantity = quantity - 1;
+           $.ajax({
+                url: '/change-cart',
+                method: 'POST',
+                data:{
+                     item,
+                     quantity,
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+           }).done(()=>{
+                window.location.reload();
+           })
+     })
+
+     $('.btn-plus,.fa-plus').click((e)=>{
+           item = e.target.id.split('_')[1];
+           quantity = e.target.id.split('_')[2];
+           quantity = (Number)(quantity) + 1;
+           $.ajax({
+                url: '/change-cart',
+                method: 'POST',
+                data:{
+                     item,
+                     quantity,
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+           }).done(()=>{
+                window.location.reload();
+           })
+     })
+     $('.remove,.ic-remove').click((e)=>{
+           item = e.target.id.split('_')[1];
+           quantity = 0;
+           $.ajax({
+                url: '/change-cart',
+                method: 'POST',
+                data:{
+                     item,
+                     quantity,
+                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                }
+           }).done(()=>{
+                window.location.reload();
+           })
+     })
+     $('.btn-block').click(()=>{
+         var total = '{{sum}}'
+         if(total > 0){
+            window.location.replace('/checkout');
+         }else{
+             alert('You have no item in your cart ! let shopping')
+         }
+     })
+     </script>
+
+{% endblock %}
