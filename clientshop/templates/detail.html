@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            {% if products.cate == 0 %}
+
                 <div class="col-lg-7 pb-5">
                     <h3 class="font-weight-semi-bold">{{ products.name }}</h3>
                     <div class="d-flex mb-3">
@@ -71,20 +71,29 @@
                         </div>
                     </div>
                 </div>
-            {% endif %}
         </div>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Thông tin</a>
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
-                        <p>Author: {{ products.author }}</p>
-                        <p>Category: {{ products.category }}</p>
+                        <h4 class="mb-3">Mô tả sản phẩm</h4>
+                        {% if products.cate == 0 %}
+                            <p>Tác giả: {{ products.author }}</p>
+                            <p>Thể loại: Sách</p>
+                        {% endif %}
+                        {% if products.cate == 1 %}
+                            <p>Mô tả: {{ products.description }}</p>
+                            <p>Thể loại: Giày</p>
+                        {% endif %}
+                        {% if products.cate == 2 %}
+                            <p>Nhà sản xuất: {{ products.producer }}</p>
+                            <p>Thể loại: Máy tính</p>
+                        {% endif %}
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
                     </div>

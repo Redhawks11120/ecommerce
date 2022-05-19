@@ -23,17 +23,15 @@ class Index(View):
                 book = models.BookItem.objects.filter(item=product.id)
                 detail = book[0].book;
                 products.append({'id': product.id, 'url': image.urls, "name": detail.name, "price": book[0].price})
-            else:
-                if (product.cate == 1):
-                    shoes = models.ShoesItem.objects.filter(item=product.id)
-                    detail = shoes[0].shoes;
-                    products.append({'id': product.id, 'url': image.urls, 'name': detail.name, 'price': shoes[0].price})
-                else:
-                    if (product.cate == 2):
-                        laptop = models.LaptopItem.objects.filter(item=product.id)
-                        detail = laptop[0].laptop;
-                        products.append(
-                            {'id': product.id, 'url': image.urls, 'name': detail.name, 'price': laptop[0].price})
+            elif (product.cate == 1):
+                shoes = models.ShoesItem.objects.filter(item=product.id)
+                detail = shoes[0].shoes;
+                products.append({'id': product.id, 'url': image.urls, 'name': detail.name, 'price': shoes[0].price})
+            elif (product.cate == 2):
+                laptop = models.LaptopItem.objects.filter(item=product.id)
+                detail = laptop[0].laptop;
+                products.append(
+                    {'id': product.id, 'url': image.urls, 'name': detail.name, 'price': laptop[0].price})
         context = {"page": page, "products": products, "cart": len(items)}
         return render(_request, 'index.html', context)
 
@@ -61,12 +59,12 @@ class Detail(View):
             shoes = models.ShoesItem.objects.filter(item=product.id)
             detail = shoes[0].shoes;
             products = {'cate': product.cate, 'id': product.id, 'url': image.urls, 'name': detail.name,
-                        'price': shoes[0].price}
+                        'price': shoes[0].price, "description": detail.desc}
         elif (product.cate == 2):
             laptop = models.LaptopItem.objects.filter(item=product.id)
             detail = laptop[0].laptop;
             products = {'cate': product.cate, 'id': product.id, 'url': image.urls, 'name': detail.name,
-                        'price': laptop[0].price}
+                        'price': laptop[0].price, "producer": laptop[0].laptop.producer.name}
         context = {"products": products, "cart": len(items)}
         return render(_request, 'detail.html', context)
 
